@@ -41,35 +41,50 @@ public class StudentDB {
         }
     }
 
-    public boolean studentLogin () {
+    public boolean studentLogin (String email, String password) {
         boolean loginVerified = false;
-
-        System.out.println("Enter your email: ");
-        String email = ps.nextLine();
-
-        System.out.println("Enter your password: ");
-        String pass = ps.nextLine();
 
         for (int i = 0; i < studentList.length; i++) {
             if (studentList[i] != null) {
-                if (studentList[i].email.equals(email)) {
-                    if (studentList[i].password.equals(pass)) {
-                        loginVerified = true;
-                        break;
-                    }
-                    else {
-                        System.out.println("Incorrect Password\n");
-                    }
+                if (studentList[i].email.equals(email) && studentList[i].password.equals(password)) {
+                    loginVerified = true;
+                    break;
                 }
             }
         }
         if (loginVerified) {
             System.out.println("Login Successful!\n");
+        } else {
+            System.out.println("Invalid student information!\n");
         }
-        else {
-            System.out.println("Student not found. Please Register first!\n");
+        return loginVerified;
+    }
+
+    public String getName (String email) {
+        String stdName = null;
+
+        for (int i = 0; i < studentList.length; i++) {
+            if (studentList[i] != null) {
+                if (studentList[i].email.equals(email)) {
+                    stdName = studentList[i].name;
+                }
+            }
         }
 
-        return loginVerified;
+        return  stdName;
+    }
+
+    public String getID (String email) {
+        String stdID = null;
+
+        for (int i = 0; i < studentList.length; i++) {
+            if (studentList[i] != null) {
+                if (studentList[i].email.equals(email)) {
+                    stdID = studentList[i].sid;
+                }
+            }
+        }
+
+        return  stdID;
     }
 }
